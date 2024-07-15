@@ -17,7 +17,7 @@ jobs:
       - name: Publish image to docker hub
         run: docker push nernayblackfish/cicd:latest
 
-deploy: 
+  deploy: 
     needs: build
     runs-on: aws-ec2-cicd 
     steps:
@@ -30,8 +30,8 @@ deploy:
       - name: Pull image from docker hub
         run: docker pull nernayblackfish/cicd:latest 
       - name: Delete Old Container
-        run: docker rm -f reactContainer
+        run: docker rm -f reactContainer || true
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer nernayblackfish/cicd 
+        run: docker run -d -p 3000:80 --name reactContainer nernayblackfish/cicd
   
 
